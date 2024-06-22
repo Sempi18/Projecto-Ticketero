@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Nuevo Turno</title>
+    <link rel="stylesheet" href="css/styles.css" />
+
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        const socket = io();
+
+        const form = document.getElementById("nuevo-turno-form");
+        form.addEventListener("submit", (event) => {
+          event.preventDefault();
+          const nombre = document.getElementById("nombre").value;
+          if (nombre !== "") {
+            socket.emit("CrearTurno", nombre);
+          }
+        });
+      });
+    </script>
+  </head>
+  <body>
+    <header>
+      <h1>Solicitar Nuevo Turno</h1>
+    </header>
+    <nav>
+      <ul>
+        <li><a href="index.html">Inicio</a></li>
+        <li><a target="_blank" href="turno_actual.html">Turno Actual</a></li>
+        <li><a target="_blank" href="atender_turno.html">Atender Turno</a></li>
+      </ul>
+    </nav>
+    <main>
+      <h2>Ingrese su Nombre</h2>
+      <form id="nuevo-turno-form">
+        <label for="nombre">Nombre:</label>
+        <input type="text" id="nombre" name="nombre" required />
+        <button type="submit">Solicitar Turno</button>
+      </form>
+    </main>
+  </body>
+</html>
